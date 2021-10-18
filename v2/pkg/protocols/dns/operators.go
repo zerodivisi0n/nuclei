@@ -96,7 +96,7 @@ func (request *Request) MakeResultEvent(wrapped *output.InternalWrappedEvent) []
 
 func (request *Request) MakeResultEventItem(wrapped *output.InternalWrappedEvent) *output.ResultEvent {
 	data := &output.ResultEvent{
-		TemplateID:       types.ToString(wrapped.InternalEvent["template-id"]),
+		TemplateID:       model.ToTemplateID(types.ToString(wrapped.InternalEvent["template-id"])),
 		TemplatePath:     types.ToString(wrapped.InternalEvent["template-path"]),
 		Info:             wrapped.InternalEvent["template-info"].(model.Info),
 		Type:             "dns",

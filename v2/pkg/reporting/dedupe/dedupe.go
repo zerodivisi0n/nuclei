@@ -65,7 +65,7 @@ func (s *Storage) Close() {
 func (s *Storage) Index(result *output.ResultEvent) (bool, error) {
 	hasher := sha1.New()
 	if result.TemplateID != "" {
-		_, _ = hasher.Write(unsafeToBytes(result.TemplateID))
+		_, _ = hasher.Write(unsafeToBytes(result.TemplateID.String()))
 	}
 	if result.MatcherName != "" {
 		_, _ = hasher.Write(unsafeToBytes(result.MatcherName))

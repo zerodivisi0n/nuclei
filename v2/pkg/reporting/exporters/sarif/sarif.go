@@ -56,7 +56,7 @@ func (i *Exporter) Export(event *output.ResultEvent) error {
 
 	h := sha1.New()
 	_, _ = h.Write([]byte(event.Host))
-	templateID := event.TemplateID + "-" + hex.EncodeToString(h.Sum(nil))
+	templateID := event.TemplateID.String() + "-" + hex.EncodeToString(h.Sum(nil))
 
 	fullDescription := format.MarkdownDescription(event)
 	sarifSeverity := getSarifSeverity(event)

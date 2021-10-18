@@ -33,7 +33,7 @@ type Executer interface {
 // ExecuterOptions contains the configuration options for executer clients
 type ExecuterOptions struct {
 	// TemplateID is the ID of the template for the request
-	TemplateID string
+	TemplateID model.TemplateID
 	// TemplatePath is the path of the template for the request
 	TemplatePath string
 	// TemplateInfo contains information block of the template request

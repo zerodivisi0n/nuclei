@@ -27,7 +27,7 @@ type Writer interface {
 	// Write writes the event to file and/or screen.
 	Write(*ResultEvent) error
 	// Request logs a request in the trace log
-	Request(templateID, url, requestType string, err error)
+	Request(templateID model.TemplateID, url, requestType string, err error)
 }
 
 // StandardWriter is a writer writing output to file and screen for results.
@@ -59,7 +59,7 @@ type InternalWrappedEvent struct {
 // ResultEvent is a wrapped result event for a single nuclei output.
 type ResultEvent struct {
 	// TemplateID is the ID of the template for the result.
-	TemplateID string `json:"template-id"`
+	TemplateID model.TemplateID `json:"template-id"`
 	// TemplatePath is the path of template
 	TemplatePath string `json:"-"`
 	// Info contains information block of the template for the result.
@@ -164,14 +164,14 @@ func (w *StandardWriter) Write(event *ResultEvent) error {
 
 // JSONTraceRequest is a trace log request written to file
 type JSONTraceRequest struct {
-	ID    string `json:"id"`
-	URL   string `json:"url"`
-	Error string `json:"error"`
-	Type  string `json:"type"`
+	ID    model.TemplateID `json:"id"`
+	URL   string           `json:"url"`
+	Error string           `json:"error"`
+	Type  string           `json:"type"`
 }
 
 // Request writes a log the requests trace log
-func (w *StandardWriter) Request(templateID, url, requestType string, err error) {
+func (w *StandardWriter) Request(templateID model.TemplateID, url, requestType string, err error) {
 	if w.traceFile == nil {
 		return
 	}

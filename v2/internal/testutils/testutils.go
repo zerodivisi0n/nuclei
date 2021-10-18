@@ -63,7 +63,7 @@ var DefaultOptions = &types.Options{
 // MockOutputWriter is a mocked output writer.
 type MockOutputWriter struct {
 	aurora          aurora.Aurora
-	RequestCallback func(templateID, url, requestType string, err error)
+	RequestCallback func(templateID model.TemplateID, url, requestType string, err error)
 	WriteCallback   func(o *output.ResultEvent)
 }
 
@@ -89,7 +89,7 @@ func (m *MockOutputWriter) Write(result *output.ResultEvent) error {
 }
 
 // Request writes a log the requests trace log
-func (m *MockOutputWriter) Request(templateID, url, requestType string, err error) {
+func (m *MockOutputWriter) Request(templateID model.TemplateID, url, requestType string, err error) {
 	if m.RequestCallback != nil {
 		m.RequestCallback(templateID, url, requestType, err)
 	}
@@ -106,7 +106,7 @@ type TemplateInfo struct {
 func NewMockExecuterOptions(options *types.Options, info *TemplateInfo) *protocols.ExecuterOptions {
 	progressImpl, _ := progress.NewStatsTicker(0, false, false, false, 0)
 	executerOpts := &protocols.ExecuterOptions{
-		TemplateID:   info.ID,
+		TemplateID:   model.ToTemplateID(info.ID),
 		TemplateInfo: info.Info,
 		TemplatePath: info.Path,
 		Output:       NewMockOutputWriter(),

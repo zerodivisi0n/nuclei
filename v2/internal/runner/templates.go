@@ -44,7 +44,7 @@ func (r *Runner) logAvailableTemplate(tplPath string) {
 	if err != nil {
 		gologger.Error().Msgf("Could not parse file '%s': %s\n", tplPath, err)
 	} else {
-		gologger.Print().Msgf("%s\n", r.templateLogMsg(t.ID,
+		gologger.Print().Msgf("%s\n", r.templateLogMsg(t.ID.String(),
 			types.ToString(t.Info.Name),
 			t.Info.Authors.ToSlice(),
 			t.Info.SeverityHolder.Severity))

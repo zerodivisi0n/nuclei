@@ -42,7 +42,7 @@ func (i *Exporter) Export(event *output.ResultEvent) error {
 	description := format.MarkdownDescription(event)
 
 	filenameBuilder := &strings.Builder{}
-	filenameBuilder.WriteString(event.TemplateID)
+	filenameBuilder.WriteString(event.TemplateID.String())
 	filenameBuilder.WriteString("-")
 	filenameBuilder.WriteString(strings.ReplaceAll(strings.ReplaceAll(event.Matched, "/", "_"), ":", "_"))
 

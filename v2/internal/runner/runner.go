@@ -24,6 +24,7 @@ import (
 	"github.com/projectdiscovery/nuclei/v2/pkg/catalog"
 	"github.com/projectdiscovery/nuclei/v2/pkg/catalog/config"
 	"github.com/projectdiscovery/nuclei/v2/pkg/catalog/loader"
+	"github.com/projectdiscovery/nuclei/v2/pkg/model"
 	"github.com/projectdiscovery/nuclei/v2/pkg/model/types/severity"
 	"github.com/projectdiscovery/nuclei/v2/pkg/output"
 	"github.com/projectdiscovery/nuclei/v2/pkg/parsers"
@@ -491,7 +492,7 @@ func (r *Runner) RunEnumeration() error {
 			clusterID := fmt.Sprintf("cluster-%s", xid.New().String())
 
 			finalTemplates = append(finalTemplates, &templates.Template{
-				ID:            clusterID,
+				ID:            model.ToTemplateID(clusterID),
 				RequestsHTTP:  cluster[0].RequestsHTTP,
 				Executer:      clusterer.NewExecuter(cluster, &executerOpts),
 				TotalRequests: len(cluster[0].RequestsHTTP),

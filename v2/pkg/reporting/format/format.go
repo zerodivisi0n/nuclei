@@ -147,7 +147,7 @@ func MarkdownDescription(event *output.ResultEvent) string { // TODO remove the 
 // GetMatchedTemplate returns the matched template from a result event
 func GetMatchedTemplate(event *output.ResultEvent) string {
 	builder := &strings.Builder{}
-	builder.WriteString(event.TemplateID)
+	builder.WriteString(event.TemplateID.String())
 	if event.MatcherName != "" {
 		builder.WriteString(":")
 		builder.WriteString(event.MatcherName)
